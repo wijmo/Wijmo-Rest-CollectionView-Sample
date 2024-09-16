@@ -9,7 +9,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@mescius/wijmo.react.all": "release",
+        "@mescius/wijmo.react.all": "5.20241.21-rc",
         "bootstrap": "3.3.7",
         "plugin-typescript": "8.0.0",
         "typescript": "3.1.2",

@@ -10,7 +10,7 @@
         "start": "concurrently \"tsc --watch\" \"lite-server\""
     },
     "dependencies": {
-        "@mescius/wijmo.angular2.all": "release",
+        "@mescius/wijmo.angular2.all": "5.20241.21-rc",
         "@angular/animations": "~16.1.8",
         "@angular/common": "~16.1.8",
         "@angular/compiler": "~16.1.8",
