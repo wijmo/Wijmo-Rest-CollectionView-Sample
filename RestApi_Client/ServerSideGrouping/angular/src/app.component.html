@@ -1,0 +1,32 @@
+<div class="container-fluid">
+
+    <div id="feature-options">
+        <label for="groupServer">
+            <input id="groupServer" type="radio" name="feature" value="groupOnServer" checked (change)="toggleFeature('groupServer')"> Server Side Grouping
+        </label>
+        <br>
+        <label for="virtual">
+            <input id="virtual" type="radio" name="feature" value="virtualGrouping" (change)="toggleFeature('virtual')"> Server Side Grouping with
+            virtualization
+        </label>
+        <br>
+        <label for="lazyload">
+            <input id="lazyload" type="radio" name="feature" value="lazyLoadGrouping" (change)="toggleFeature('lazyload')"> Server Side Grouping with group
+            lazy-loading
+        </label>
+    </div>
+
+    <br />
+
+    <wj-flex-grid #theGrid [isReadOnly]="isReadOnly" [itemsSource]="view" [autoGenerateColumns]="false">
+        <wj-flex-grid-filter [filterType]="'Condition'"></wj-flex-grid-filter>
+        
+        <wj-flex-grid-column binding="OrderId" header="Order ID" />
+        <wj-flex-grid-column binding="StockItem" header="Stock Item" [width]="'*'" [minWidth]="200" />
+        <wj-flex-grid-column binding="Color" header="Color" />
+        <wj-flex-grid-column binding="Quantity" header="Quantity" [dataType]="'Number'" format="n0" />
+        <wj-flex-grid-column binding="UnitPrice" header="Unit Price" [dataType]="'Number'" format="n2" />
+        <wj-flex-grid-column binding="Date" header="Date" [dataType]="'Date'" format="d" />
+        <wj-flex-grid-column binding="IsChillerStock" header="Is Chiller Stock" [dataType]="'Boolean'" />
+    </wj-flex-grid>
+</div>

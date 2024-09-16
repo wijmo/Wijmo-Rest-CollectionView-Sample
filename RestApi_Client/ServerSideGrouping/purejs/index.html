@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MESCIUS Wijmo RestCollectionView RestAPI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SystemJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.21.5/system.src.js"
+        integrity="sha512-skZbMyvYdNoZfLmiGn5ii6KmklM82rYX2uWctBhzaXPxJgiv4XBwJnFGr5k8s+6tE1pcR1nuTKghozJHyzMcoA=="
+        crossorigin="anonymous"></script>
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('./src/app');
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div id="feature-options">
+            <label for="groupServer">
+                <input id="groupServer" type="radio" name="feature" value="groupOnServer" checked> Server Side Grouping
+            </label>
+            <br>
+            <label for="virtual">
+                <input id="virtual" type="radio" name="feature" value="virtualGrouping"> Server Side Grouping with
+                virtualization
+            </label>
+            <br>
+            <label for="lazyload">
+                <input id="lazyload" type="radio" name="feature" value="lazyLoadGrouping"> Server Side Grouping with
+                group lazy-loading
+            </label>
+        </div>
+
+        <div id="theGrid"></div>
+
+    </div>
+</body>
+
+</html>

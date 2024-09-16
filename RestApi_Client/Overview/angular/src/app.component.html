@@ -1,0 +1,35 @@
+<div class="container-fluid">
+
+    <label>
+        <input id="paging"
+            type="radio"
+            name="viewtype"
+            value="paging"
+            checked
+            (change)="toggleFeature('paging')">Paging
+    </label>
+    
+    <label>
+        <input id="virtualization"  
+        type="radio" 
+        name="viewtype"
+        value="virtualization"
+        (change)="toggleFeature('virtualization')">Virtualization
+    </label>
+    
+
+    <br />
+
+    <div *ngIf="enablePaging">
+        <wj-collection-view-navigator #nav
+        [cv]="view"
+        [byPage]="true">
+    </wj-collection-view-navigator>
+    </div>
+
+    <wj-flex-grid #theGrid
+        [isReadOnly]="isReadOnly"
+        [itemsSource]="view">
+        <wj-flex-grid-filter></wj-flex-grid-filter>
+    </wj-flex-grid>
+</div>

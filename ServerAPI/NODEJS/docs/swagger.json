@@ -1,0 +1,68 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Mescius.Wijmo.Sample RestApi  ",
+    "description": ""
+  },
+  "host": "localhost:4000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/wwi/api/v1/purchaseorders": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "groupBy",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "filterBy",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "aggregates",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+@Mescius.Wijmo.Sample_HostAddress = http://localhost:5125
+
+GET {{Mescius.Wijmo.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

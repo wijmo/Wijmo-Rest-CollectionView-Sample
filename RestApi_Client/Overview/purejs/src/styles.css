@@ -1,0 +1,25 @@
+body {
+    margin-bottom: 36pt;
+    margin-top: 10px;
+}
+
+label {
+    padding-right: 10px;
+}
+
+.wj-flexgrid {
+    height: 400px;
+}
+
+.spinner {
+    position: absolute;
+    z-index: 10;
+    opacity: .5;
+}
+
+.spinner img {
+    margin: auto;
+    position: relative;
+    top: 40%;
+    left: 45%;
+}
