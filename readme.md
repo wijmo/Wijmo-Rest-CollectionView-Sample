@@ -36,6 +36,7 @@ This project demonstrates Client & server-side implementations for Wijmo's RestC
 
 Both implementations can be consumed by Wijmo's RestCollectionView class from the `wijmo.rest` module.
 
-![REST API Screenshot](./screenshot.jpg)
+![screenshot](https://github.com/user-attachments/assets/9b57f21c-1509-43d4-b12b-a42e1d5abcfc)
+
 
 For detailed API documentation and additional configuration options, please refer to the individual project folders.
