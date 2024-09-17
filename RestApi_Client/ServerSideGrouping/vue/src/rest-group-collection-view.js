@@ -10,6 +10,8 @@ import { DataType, DateTime, httpRequest, copy, changeType, isString, isDate, as
 import { RestCollectionView } from '@mescius/wijmo.rest';
 // limit item count to fetch when virtualization or group lazy-loading is not enabled
 const _MAXITEMCOUNT = 10000;
+const _TableRecordCount = 231412; // total number of records available in DB for API.
+
 // DataSource API
 const _apiUrl = "http://localhost:5125/wwi/api/v1/";
 /**
@@ -46,10 +48,20 @@ export class RestGroupCollectionView extends RestCollectionView {
     _getReadParams(item, groupInfo = true, virtualParams = true) {
         let gDescs = this.groupDescriptions;
         let settings = {};
-        // limit data count with server-side grouping only
-        if (!this.virtualization && !this.groupLazyLoading && this.groupOnServer) {
+        // #region Only required when ServerAPI limits top to 100 or other value
+        // load max _MAXITEMCOUNT items when virtualization is not enabled
+        if (!this.virtualization && this.groupOnServer) {
             settings.top = _MAXITEMCOUNT;
         }
+        // all available groups in-case of virtualization 
+        if (this.virtualization && groupInfo && this.groupOnServer) {
+            settings.top = _MAXITEMCOUNT;
+        }
+        // load all available records from table for ServerSide GroupOnly case 
+        if (this.groupOnServer && !this.virtualization && !this.groupLazyLoading && !groupInfo) {
+            settings.top = _TableRecordCount;
+        }
+        // #endRegion
         // get filter definition 
         if (this.filterOnServer && this._filterProvider) {
             let filter = this._asODataFilter(this._filterProvider);
@@ -273,17 +285,17 @@ export class RestGroupCollectionView extends RestCollectionView {
             case 5: // LE = 5, 
                 return fld + ' le ' + value;
             case 6: // BW = 6, 
-                return `${fld} starts-with ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} starts-with ${value}`: `startswith(${fld},${value})`;
             case 7: // EW = 7, 
-                return `${fld} ends-with ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} ends-with ${value}` : `endswith(${fld},${value})`;
             case 8: // CT = 8, 
-                return `${fld} contains ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} contains ${value}`:`substringof(${fld},${value})`;
             case 9: // NC = 9 
-                return `${fld} not-contains ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} not-contains ${value}`:`not substringof(${fld},${value})`;
             case 10: // NBW = 10 
-                return `${fld} not-starts-with ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} not-starts-with ${value}`:`not startswith(${fld},${value})`;
             case 11: // NEW = 11 
-                return `${fld} not-ends-with ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} not-ends-with ${value}`:`not endswith(${fld},${value})`;
         }
     }
     _asODataValue(value, dataType) {

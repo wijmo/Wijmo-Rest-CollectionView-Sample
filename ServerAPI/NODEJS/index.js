@@ -15,7 +15,6 @@ const ProductTransactions = GetPurchaseOrdersData(1000);
 // Function to parse and evaluate filter expressions
 function applyFilter(query, filterBy) {
     const decodedFilter = decodeURIComponent(filterBy);
-    console.log(decodedFilter)
     var jsFilter = decodedFilter
         .replace(/\b(eq|ne|gt|lt|ge|le)\b/g, match => {
             switch (match) {
@@ -32,7 +31,7 @@ function applyFilter(query, filterBy) {
         .replace(/\bor\b/g, '||')
         .replace(/\bnot\b/g,'!');
     
-    jsFilter=(jsFilter.replace(/(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z)/g, "'$1'"))
+    jsFilter=(jsFilter.replace(/(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z)/g, "'$1'"));
     const filterFunction = new Function('item', substringof.name,startswith.name,endswith.name, `
         var {OrderId,StockItem,Quantity,TaxAmount,TaxRate,Color,IsChillerStock,UnitPrice,State,City,Country,Date}=item;        
         Date=JSON.stringify(Date).slice(1, -1);
@@ -40,13 +39,13 @@ function applyFilter(query, filterBy) {
     `);
     return query.filter(item => filterFunction(item,substringof,startswith,endswith));
 }
-function substringof(substring, fullString) {
+function substringof(fullString, substring) {
     return fullString.includes(substring);
 }
-function startswith(prefix, fullString) {
+function startswith(fullString,prefix) {
     return fullString.startsWith(prefix);
 }
-function endswith(suffix, fullString) {
+function endswith(fullString,suffix) {
     return fullString.endsWith(suffix);
 }
 // Function to calculate aggregates
@@ -139,7 +138,7 @@ function GroupBy(items, groupByFields, aggregates) {
 }
 
 app.get('/wwi/api/v1/purchaseorders', (req, res) => {
-    const { groupBy, filterBy, orderBy, skip, top, aggregates, select} = req.query;
+    const { groupBy, filterBy, sortBy, skip, top, aggregates, select} = req.query;
 
     let query = ProductTransactions;
 
@@ -160,8 +159,8 @@ app.get('/wwi/api/v1/purchaseorders', (req, res) => {
 
     // Apply sorting
     const itemsToSort = groupBy ? Array.from(groupedItems) : Array.from(query);
-    if (orderBy) {
-        const sortByFields = orderBy.split(',').map(o => o.trim());
+    if (sortBy) {
+        const sortByFields = sortBy.split(',').map(o => o.trim());
         itemsToSort.sort((a, b) => {
             for (const field of sortByFields) {
                 const [key, direction] = field.split(' ');

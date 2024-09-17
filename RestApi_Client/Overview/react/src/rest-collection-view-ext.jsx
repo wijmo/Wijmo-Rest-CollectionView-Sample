@@ -183,17 +183,17 @@ export class RestCollectionViewExt extends RestCollectionView {
             case 5: // LE = 5, 
                 return fld + ' le ' + value;
             case 6: // BW = 6, 
-                return `${fld} starts-with ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} starts-with ${value}`: `startswith(${fld},${value})`;
             case 7: // EW = 7, 
-                return `${fld} ends-with ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} ends-with ${value}` : `endswith(${fld},${value})`;
             case 8: // CT = 8, 
-                return `${fld} contains ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} contains ${value}`:`substringof(${fld},${value})`;
             case 9: // NC = 9 
-                return `${fld} not-contains ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} not-contains ${value}`:`not substringof(${fld},${value})`;
             case 10: // NBW = 10 
-                return `${fld} not-starts-with ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} not-starts-with ${value}`:`not startswith(${fld},${value})`;
             case 11: // NEW = 11 
-                return `${fld} not-ends-with ${value}`;
+                return this._url.indexOf('4000') == -1 ? `${fld} not-ends-with ${value}`:`not endswith(${fld},${value})`;
         }
     }
     _asODataValue(value, dataType) {

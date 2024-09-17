@@ -9,7 +9,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@mescius/wijmo.purejs.all": "5.20241.21-rc",
+        "@mescius/wijmo.purejs.all": "rc",
         "bootstrap": "3.3.7",
         "plugin-typescript": "8.0.0",
         "typescript": "3.1.2",

@@ -7,10 +7,10 @@
     "license": "ISC",
     "scripts": {
         "build": "tsc",
-        "start": "concurrently \"tsc --watch\" \"lite-server\""
+        "start": "npm run build && lite-server"
     },
     "dependencies": {
-        "@mescius/wijmo.angular2.all": "release",
+        "@mescius/wijmo.angular2.all": "rc",
         "@angular/animations": "~16.1.8",
         "@angular/common": "~16.1.8",
         "@angular/compiler": "~16.1.8",
